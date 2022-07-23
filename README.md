@@ -1,2 +1,2 @@
-Para instalar todos os requirimentos do sistema
+Para instalar todos os requirimentos do sistema <p>
 pip install -r requirements.txt
