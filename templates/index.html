@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
+    <title> Blog </title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
-    <h1> vou mimata </h1>
+    <h1> Home </h1>
+    {% for post in posts %}
+        <article class="post">
+            <header>
+                <div>
+                    <h1> {{ post.title }}</h1>
+                    <div class="about"> 
+                        por {{ post.author }} em {{ post.created.strftime('%d/%m/%Y') }}
+                    </div>
+                </div>
+            </header>
+            <p class="body"> {{ post.body }} </p>
+        </article>
+    {% endfor %}
 </body>
 </html>
