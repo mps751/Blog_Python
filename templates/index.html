@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title> Blog </title>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-</head>
-<body>
-    <h1> Home </h1>
-    {% for post in posts %}
-        <article class="post">
-            <header>
-                <div>
-                    <h1> {{ post.title }}</h1>
-                    <div class="about"> 
-                        por {{ post.author }} em {{ post.created.strftime('%d/%m/%Y') }}
-                    </div>
-                </div>
-            </header>
-            <p class="body"> {{ post.body }} </p>
-        </article>
-    {% endfor %}
-</body>
+<html>
+    <head>
+        <title> {% block title %}{% endblock %} Meu Blog </title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+
+    <body>
+        <h1> Home </h1>
+        <nav>
+        </nav>
+        <section class="content">
+            {% block content %}
+            {% endblock %}
+        </section>
+    </body>
 </html>

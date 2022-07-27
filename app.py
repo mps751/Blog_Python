@@ -15,4 +15,4 @@ posts = [
 @app.route("/")
 @app.route('/home')
 def index():
-    return render_template('index.html', posts = posts) 
+    return render_template('home.html', posts = posts) 

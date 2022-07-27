@@ -1,0 +1,13 @@
+h1 {
+    text-align: center;
+}
+
+html{
+    font-family: sans-serif;
+    background: #eee;
+    padding: 1rem;
+}
+body{
+    max-width: 960px;
+    margin: 0 auto;
+}
