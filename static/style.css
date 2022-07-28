@@ -1,13 +1,22 @@
-h1 {
+.home h1 {
     text-align: center;
+    font-family: "Helvetica";
 }
 
 html{
-    font-family: sans-serif;
-    background: #eee;
+    font-family: "sans-serif";
+    background: #15202B;
     padding: 1rem;
 }
+
 body{
     max-width: 960px;
     margin: 0 auto;
+    background-color: #1C2732;
+}
+
+.post {
+    font-size: x-large;
+    margin-left: 6rem;
+    margin-top: 3rem;
 }
