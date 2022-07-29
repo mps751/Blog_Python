@@ -42,7 +42,7 @@ def load_user(id):
 db.create_all()
 
 @app.route("/")
-@app.route('/home') 
+@app.route("/home") 
 def index():
     posts = Post.query.all()
     return render_template('home.html', posts = posts)

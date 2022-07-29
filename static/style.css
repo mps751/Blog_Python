@@ -31,9 +31,18 @@ body{
 .content input{
     padding: 1em;
     margin-bottom: 1.5em; 
+    outline: none;
+
+}
+
+.content input[type="submit"]{
+    font-size: large;
+    font-family: Andale Mono, monospace;
+    padding: 8px;
 }
 
 .content h2 {
     color: white;
     text-align: center;
+    font-family: "Candara";
 }
