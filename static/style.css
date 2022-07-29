@@ -20,3 +20,20 @@ body{
     margin-left: 6rem;
     margin-top: 3rem;
 }
+
+.content form {
+    margin: 1em auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 25%;
+}
+
+.content input{
+    padding: 1em;
+    margin-bottom: 1.5em; 
+}
+
+.content h2 {
+    color: white;
+    text-align: center;
+}
