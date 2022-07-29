@@ -8,9 +8,26 @@
         <div class="home">
             <h1> Home </h1>
             <nav>
+                {% if current_user.is_authenticated %}
+                    <li> <span> {{current_user.username}} </span></li>
+                    <a href="{{ url_for('create') }}"> Create Post </a>
+                    <a href="{{ url_for('logout') }}"> Log Out </a>
+                {% else %}
+                    <a href="{{ url_for('register') }}"> Register </a>
+                    <a href="{{ url_for('login') }}"> Login </a>
+                {% endif %}
             </nav>
         </div>
         <section class="content">
+            <header>
+                {% block header %}
+                {% endblock %}
+
+                {% for message in get_flashed_messages() %}
+                    <div class="flash"> {{ message }} </div>
+                {% endfor %}
+
+            </header>
             {% block content %}
             {% endblock %}
         </section>

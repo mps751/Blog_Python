@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request, flash
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user
+from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user, login_required
 from sqlalchemy.exc import IntegrityError
  
 app = Flask("blog")
@@ -42,7 +42,7 @@ def load_user(id):
 db.create_all()
 
 @app.route("/")
-@app.route("/home") 
+@app.route("/home")
 def index():
     posts = Post.query.all()
     return render_template('home.html', posts = posts)
@@ -50,7 +50,7 @@ def index():
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
@@ -80,7 +80,7 @@ def login():
             flash("Incorrect Username or Password")
             return redirect(url_for('login'))
         login_user(user)
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
 
     return render_template("login.html")
 
@@ -88,3 +88,18 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/create', methods=["GET", "POST"])
+@login_required
+def create():
+    if request.method == "POST":
+        title = request.form['title']
+        body = request.form['body']
+        try:
+            post = Post(title=title, body=body, author=current_user)
+            db.session.add(post)
+            db.session.commit()
+            return redirect(url_for('index'))
+        except IntegrityError:
+            flash("Error on create Post, try again later")
+    return render_template('create.html')
