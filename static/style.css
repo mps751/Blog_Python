@@ -19,6 +19,7 @@ body{
     font-size: x-large;
     margin-left: 6rem;
     margin-top: 3rem;
+    color: white;
 }
 
 .content form {
@@ -35,6 +36,13 @@ body{
 
 }
 
+.content textarea{
+    padding: 1em;
+    margin-bottom: 1.5em; 
+    outline: none;
+
+}
+
 .content input[type="submit"]{
     font-size: large;
     font-family: Andale Mono, monospace;
@@ -45,4 +53,10 @@ body{
     color: white;
     text-align: center;
     font-family: "Candara";
+}
+
+.home button {
+    font-size: large;
+    font-family: Andale Mono, monospace;
+    padding: 8px;
 }

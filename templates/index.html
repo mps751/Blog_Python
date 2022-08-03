@@ -9,12 +9,20 @@
             <h1> Home </h1>
             <nav>
                 {% if current_user.is_authenticated %}
-                    <li> <span> {{current_user.username}} </span></li>
-                    <a href="{{ url_for('create') }}"> Create Post </a>
-                    <a href="{{ url_for('logout') }}"> Log Out </a>
+                    <li> <span> {{current_user.username}} </span> </li>
+                    <a href="{{ url_for('create') }}">
+                        <button> Create Post </button>
+                    </a>
+                    <a href="{{ url_for('logout') }}">
+                        <button> Logout </button>
+                    </a>
                 {% else %}
-                    <a href="{{ url_for('register') }}"> Register </a>
-                    <a href="{{ url_for('login') }}"> Login </a>
+                    <a href="{{ url_for('register') }}">
+                        <button> Register </button>
+                    </a>
+                    <a href="{{ url_for('login') }}">
+                        <button> Login </button> 
+                    </a>
                 {% endif %}
             </nav>
         </div>
