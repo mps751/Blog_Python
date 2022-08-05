@@ -1,15 +1,15 @@
 {% extends "index.html" %}
 
-{% block title %} Página Inicial {% endblock %}
+{% block title %} Home {% endblock %}
 
 {% block content %}
 {% for post in posts %}
     <article class="post">
         <header>
             <div>
-                <h1>{{ post.title }}</h1>
                 <div class="about">
-                    by {{ post.author.username }} on {{ post.created.strftime('%d/%m/%Y') }}
+                    {{ post.author.username }} <span class="date">
+                        {{ post.created.strftime('%d/%m/%Y') }} </span>
                 </div>
             </div>
         </header>

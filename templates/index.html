@@ -2,14 +2,12 @@
     <head>
         <title> {% block title %} {% endblock %} </title>
         <link rel="stylesheet" href="/static/style.css">
-    </head>
-
-    <body>
-        <div class="home">
-            <h1> Home </h1>
+        
+        <div class="nav">
             <nav>
+                <h1> Home </h1>
                 {% if current_user.is_authenticated %}
-                    <li> <span> {{current_user.username}} </span> </li>
+                    <span> {{current_user.username}} </span>
                     <a href="{{ url_for('create') }}">
                         <button> Create Post </button>
                     </a>
@@ -26,14 +24,16 @@
                 {% endif %}
             </nav>
         </div>
+    </head>
+
+    <body>
+        <div class="home">
+        </div>
         <section class="content">
             <header>
                 {% block header %}
-                {% endblock %}
 
-                {% for message in get_flashed_messages() %}
-                    <div class="flash"> {{ message }} </div>
-                {% endfor %}
+                {% endblock %}
 
             </header>
             {% block content %}

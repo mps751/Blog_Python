@@ -10,7 +10,6 @@
 
 {% block content %}
 <form method="POST">
-    <input id="title" name="title" required value="{{ request.form['title'] }}">
     <textarea id="body" name="body" > {{ request.form['body'] }} </textarea>
 
     <input type="submit" value="POST">

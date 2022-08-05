@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user, login_required
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import desc
  
 app = Flask("blog")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -16,7 +17,6 @@ login = LoginManager(app)
 class Post(db.Model):
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    title = db.Column(db.String(70), nullable=False)
     body = db.Column(db.String(500), nullable=False)
     created = db.Column(db.DateTime, default=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -44,7 +44,7 @@ db.create_all()
 @app.route("/")
 @app.route("/home")
 def index():
-    posts = Post.query.all()
+    posts = Post.query.order_by(desc(Post.created)).limit(3).all()
     return render_template('home.html', posts = posts)
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -93,10 +93,9 @@ def logout():
 @login_required
 def create():
     if request.method == "POST":
-        title = request.form['title']
         body = request.form['body']
         try:
-            post = Post(title=title, body=body, author=current_user)
+            post = Post(body=body, author=current_user)
             db.session.add(post)
             db.session.commit()
             return redirect(url_for('index'))
