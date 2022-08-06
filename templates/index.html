@@ -5,30 +5,25 @@
         
         <div class="nav">
             <nav>
-                <h1> Home </h1>
                 {% if current_user.is_authenticated %}
-                    <span> {{current_user.username}} </span>
-                    <a href="{{ url_for('create') }}">
-                        <button> Create Post </button>
-                    </a>
-                    <a href="{{ url_for('logout') }}">
-                        <button> Logout </button>
-                    </a>
+                    <ul>
+                        <li style="float: left"> Home </li>
+                        <li> <a href="{{ url_for('logout') }}"> Log Out </a> </li>
+                        <li> <a href="{{ url_for('create') }}"> Create Post </a> </i>
+                        <li> <span> {{current_user.username}} </span> </li>
+                    </ul>
+
                 {% else %}
-                    <a href="{{ url_for('register') }}">
-                        <button> Register </button>
-                    </a>
-                    <a href="{{ url_for('login') }}">
-                        <button> Login </button> 
-                    </a>
+                    <ul>
+                        <li> <a href="{{ url_for('login') }}"> Login </a> </li>
+                        <li> <a href="{{ url_for('register') }}"> Register </a> </i>
+                    </ul>
                 {% endif %}
             </nav>
         </div>
     </head>
 
     <body>
-        <div class="home">
-        </div>
         <section class="content">
             <header>
                 {% block header %}
