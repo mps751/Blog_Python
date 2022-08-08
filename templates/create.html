@@ -9,10 +9,9 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST">
-    <textarea id="body" name="body" > {{ request.form['body'] }} </textarea>
+    <form method="POST">
+        <textarea id="body" name="body" > {{ request.form['body'] }} </textarea>
 
-    <input type="submit" value="POST">
-
-</form>
+        <input type="submit" value="POST">
+    </form>
 {% endblock %}

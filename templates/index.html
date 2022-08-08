@@ -1,13 +1,15 @@
 <html>
     <head>
         <title> {% block title %} {% endblock %} </title>
-        <link rel="stylesheet" href="/static/style.css">
-        
+        <link rel="stylesheet" href="/static/style.css">    
+    </head>
+
+    <body>
         <div class="nav">
             <nav>
                 {% if current_user.is_authenticated %}
                     <ul>
-                        <li style="float: left"> Home </li>
+                        <li class="home"> Home </li>
                         <li> <a href="{{ url_for('logout') }}"> Log Out </a> </li>
                         <li> <a href="{{ url_for('create') }}"> Create Post </a> </i>
                         <li> <span> {{current_user.username}} </span> </li>
@@ -15,22 +17,21 @@
 
                 {% else %}
                     <ul>
+                        <li class="home"> Home </li>
                         <li> <a href="{{ url_for('login') }}"> Login </a> </li>
                         <li> <a href="{{ url_for('register') }}"> Register </a> </i>
                     </ul>
                 {% endif %}
             </nav>
         </div>
-    </head>
-
-    <body>
+        
         <section class="content">
             <header>
                 {% block header %}
-
+                    
                 {% endblock %}
-
             </header>
+            
             {% block content %}
             {% endblock %}
         </section>
