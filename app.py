@@ -63,10 +63,8 @@ def register():
         except IntegrityError:
             flash("Username or Email already exists")
         else:
-            return redirect(url_for('login'))
-
-    else:
-        return render_template('register.html')
+            return redirect(url_for('login'))    
+    return render_template('register.html')
 
 @app.route('/login', methods=["GET", "POST"])
 def login():

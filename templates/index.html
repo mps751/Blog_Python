@@ -9,15 +9,16 @@
             <nav>
                 {% if current_user.is_authenticated %}
                     <ul>
-                        <li class="home"> Home </li>
+                        <li style="float:left;"> <a href="{{ url_for('index') }}"> Home </a> </li>
                         <li> <a href="{{ url_for('logout') }}"> Log Out </a> </li>
                         <li> <a href="{{ url_for('create') }}"> Create Post </a> </i>
+                        <li> <a href=""> Profile </a></li>
                         <li> <span> {{current_user.username}} </span> </li>
                     </ul>
 
                 {% else %}
                     <ul>
-                        <li class="home"> Home </li>
+                        <li style="float:left;"> <a href="{{ url_for('index') }}"> Home </a> </li>
                         <li> <a href="{{ url_for('login') }}"> Login </a> </li>
                         <li> <a href="{{ url_for('register') }}"> Register </a> </i>
                     </ul>

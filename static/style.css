@@ -5,9 +5,8 @@ html {
 
 body {
     width: 100%;
-    max-width: 960px;
     margin: auto;
-    background-color: #1C2732;
+
 }
 
 .nav span {
@@ -18,20 +17,13 @@ body {
     font-family: Andale Mono, monospace;
 }
 
-.nav .home {
-    color: white;
-    margin-left: 0.1em;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: x-large;
-    float: left;
-}
-
 .nav ul {
     list-style-type: none;
     margin: 0;
     padding-top: 1em;
+    padding-bottom: 1em;
     overflow: hidden;
-    background-color: #333;
+    background-color: #111922;
 }
 
 .nav li {
@@ -51,13 +43,6 @@ body {
 
 li a:hover {
     background-color: #111;
-}
-
-.post {
-    font-size: x-large;
-    margin-left: 6rem;
-    margin-top: 3rem;
-    color: white;
 }
 
 .content form {
@@ -94,10 +79,22 @@ li a:hover {
 }
 
 .flash {
-    font-size: large;
+    text-align: center;
+    font-size: medium;
     color: #ffffff;
     font-family: "Candara";
     margin-bottom: 1em;
+}
+
+.post {
+    max-width: 800px;
+    font-size: x-large;
+    margin-left: 20rem;
+    margin-right: 20rem;
+    margin-top: 3rem;
+    padding: 1em;
+    color: white;
+    background-color: #212E3C;
 }
 
 .about {
