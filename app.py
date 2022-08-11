@@ -42,7 +42,7 @@ def load_user(id):
 db.create_all()
 
 @app.route("/")
-@app.route("/home")
+@app.route("/home", methods=["POST", "GET"])
 def index():
     posts = Post.query.order_by(desc(Post.created)).all()
     return render_template('home.html', posts = posts)
@@ -100,3 +100,7 @@ def create():
         except IntegrityError:
             flash("Error on create Post, try again later")
     return render_template('create.html')
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')

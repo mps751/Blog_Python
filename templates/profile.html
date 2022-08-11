@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+
+{% block title %} Profile {% endblock %}
+
+{% block content %}
+    <div class="profile">
+        <h1> Welcome, {{ current_user.username }} </h1>
+    </div>
+{% endblock%}

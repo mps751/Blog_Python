@@ -12,7 +12,7 @@
                         <li style="float:left;"> <a href="{{ url_for('index') }}"> Home </a> </li>
                         <li> <a href="{{ url_for('logout') }}"> Log Out </a> </li>
                         <li> <a href="{{ url_for('create') }}"> Create Post </a> </i>
-                        <li> <a href=""> Profile </a></li>
+                        <li> <a href="{{ url_for('profile') }}"> Profile </a></li>
                         <li> <span> {{current_user.username}} </span> </li>
                     </ul>
 
@@ -27,12 +27,6 @@
         </div>
         
         <section class="content">
-            <header>
-                {% block header %}
-                    
-                {% endblock %}
-            </header>
-            
             {% block content %}
             {% endblock %}
         </section>
