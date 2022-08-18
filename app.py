@@ -45,6 +45,15 @@ db.create_all()
 @app.route("/home", methods=["POST", "GET"])
 def index():
     posts = Post.query.order_by(desc(Post.created)).all()
+    if request.method == "POST":
+        body = request.form['body']
+        try:
+            post = Post(body=body, author=current_user)
+            db.session.add(post)
+            db.session.commit()
+            return redirect(url_for('index'))
+        except IntegrityError:
+            flash("Error on create Post, try again later")
     return render_template('home.html', posts = posts)
 
 @app.route('/register', methods=['POST', 'GET'])

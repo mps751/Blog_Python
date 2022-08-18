@@ -3,6 +3,12 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
+    <div class="createpost">
+        <form method="POST">
+            <textarea id="body" name="body" > {{ request.form['body'] }} </textarea>
+            <input type="submit" id="inputpost" mouseenter="entrar()" value="POST">
+        </form>
+    </div>
 
 {% for post in posts %}
     <article class="post">

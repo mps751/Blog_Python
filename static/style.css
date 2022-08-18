@@ -59,6 +59,21 @@ li a:hover {
 
 }
 
+.createpost textarea {
+    height: 6em;
+    background-color: #111922;
+}
+
+.createpost input[type="submit"] {
+    position: relative;
+    margin-left: auto;
+    color: black;
+    text-align: center;
+    height: 1.5em auto;
+    width: 4.5em;
+    font-family: Andale Mono, monospace;
+}
+
 .content textarea{
     padding: 1em;
     margin-bottom: 1.5em; 
