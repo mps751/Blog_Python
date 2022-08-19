@@ -1,6 +1,6 @@
 var butt = document.getElementById('inputpost')
-butt.addEventListener('mouseenter', entrar)
+butt.addEventListener('mouseenter', enter)
 
-function entrar() {
-    butt.style.background = 'pink'
+function enter() {
+    x.style = 'black'
 }

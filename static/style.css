@@ -59,14 +59,17 @@ li a:hover {
 
 }
 
-.createpost textarea {
-    height: 6em;
+.create textarea {
+    height: 7em;
     background-color: #111922;
+    color: #ffffff;
+    font-size: large;
 }
 
-.createpost input[type="submit"] {
+.create input[type="submit"] {
     position: relative;
     margin-left: auto;
+    background-color:rgb(31, 211, 214);
     color: black;
     text-align: center;
     height: 1.5em auto;
@@ -74,11 +77,19 @@ li a:hover {
     font-family: Andale Mono, monospace;
 }
 
-.content textarea{
+.create input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #111922;
+    color: #ffffff;
+    border-width: 0.8px;
+    border-style: solid;
+    border-color: #ffffff;
+}
+
+.content textarea {
     padding: 1em;
     margin-bottom: 1.5em; 
     outline: none;
-
 }
 
 .content input[type="submit"]{
