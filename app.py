@@ -99,3 +99,13 @@ def logout():
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
+
+@app.route('/delete/<int:id>')
+@login_required
+def delete(id):
+    try:
+        p = Post.query.filter(Post.id == id).delete()
+        db.session.commit()
+    except:
+        db.session.rollback()
+    return redirect(url_for('index'))

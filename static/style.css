@@ -136,3 +136,15 @@ li a:hover {
 .body {
     font-size: 0.9em;
 }
+
+.delete a {
+    float: right;
+    color: #ffffff;
+   
+}
+
+.delete a:hover {
+    cursor: pointer;
+    color:rgb(31, 211, 214);
+    font-size: 24px;
+}
