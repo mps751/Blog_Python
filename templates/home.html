@@ -17,11 +17,14 @@
         <header>
             <div>
                 <div class="about">
-                    <span> <div class="delete">
+                    {% if post in current_user.posts %} 
+                        <span> <div class="delete">
                         {% if current_user.is_authenticated %}
                                 <a href="{{ url_for('delete', id = post.id) }}"> <i class="fa fa-trash"> </i>  </a>
-                    </div> </span>
-                        {% endif %} {{ post.author.username }} <span class="date">
+                    </div> </span> 
+                        {% endif %}
+                    {% endif %} 
+                    {{ post.author.username }} <span class="date">
                         {{ post.created.strftime('%d/%m/%Y') }} </span> 
                 </div>
             </div>

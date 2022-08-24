@@ -97,9 +97,9 @@ def logout():
     return redirect(url_for('index'))
 
 @app.route('/profile')
+@login_required
 def profile():
-    posts = Post.query.order_by(desc(Post.created))
-    posts = current_user.posts
+    posts = Post.query.order_by(desc(Post.created)).all()
     return render_template('profile.html', posts = posts)
 
 @app.route('/delete/<int:id>')
