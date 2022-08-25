@@ -110,4 +110,4 @@ def delete(id):
         db.session.commit()
     except:
         db.session.rollback()
-    return redirect(url_for('index'))
+    return redirect(request.referrer)
