@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request, flash
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user, login_required
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
@@ -10,6 +11,9 @@ app = Flask("blog")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'chavesecreta'
+
+UPLOAD_FOLDER = './upload'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 db = SQLAlchemy(app)
 login = LoginManager(app)
@@ -34,6 +38,12 @@ class User(UserMixin, db.Model):
     
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+class Img(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    img = db.Column(db.Text, unique=True, nullable=False)
+    name = db.Column(db.Text, nullable=False)
+    mimetype = db.Column(db.Text, nullable=False)
 
 @login.user_loader
 def load_user(id):
@@ -111,3 +121,16 @@ def delete(id):
     except:
         db.session.rollback()
     return redirect(request.referrer)
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    pic = request.files['pic']
+
+    filename = secure_filename(pic.filename)
+    mimetype = pic.mimetype
+
+    img = Img(img=pic.read(), mimetype=mimetype, name=filename)
+    db.session.add(img)
+    db.session.commit()
+
+    return "sucess", 200
