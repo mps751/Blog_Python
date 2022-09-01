@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash, Response
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -44,6 +44,7 @@ class Img(db.Model):
     img = db.Column(db.Text, unique=True, nullable=False)
     name = db.Column(db.Text, nullable=False)
     mimetype = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 @login.user_loader
 def load_user(id):
@@ -106,9 +107,9 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@app.route('/profile')
+@app.route('/profile/<string:username>')
 @login_required
-def profile():
+def profile(username):
     posts = Post.query.order_by(desc(Post.created)).all()
     return render_template('profile.html', posts = posts)
 
@@ -122,15 +123,24 @@ def delete(id):
         db.session.rollback()
     return redirect(request.referrer)
 
-@app.route('/upload', methods=['POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
-    pic = request.files['pic']
+    if request.method == 'POST':
+        pic = request.files['pic']
 
-    filename = secure_filename(pic.filename)
-    mimetype = pic.mimetype
+        filename = secure_filename(pic.filename)
+        mimetype = pic.mimetype
 
-    img = Img(img=pic.read(), mimetype=mimetype, name=filename)
-    db.session.add(img)
-    db.session.commit()
+        img = Img(img=pic.read(), mimetype=mimetype, name=filename)
+        db.session.add(img)
+        db.session.commit()
 
-    return "sucess", 200
+    return render_template("upload.html")
+
+@app.route('/<int:id>')
+def get_img(id):
+    img = Img.query.filter_by(id=id).first()
+    if not img:
+        return 'Img Not Found!', 404
+
+    return Response(img.img, mimetype=img.mimetype)

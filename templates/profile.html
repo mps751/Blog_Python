@@ -4,7 +4,8 @@
 
 {% block content %}
     <div class="profile">
-        <h1> {{current_user.username }} <h1>
+        <img src="data:;base64,{{ img }}"/>
+        <h1> {{ current_user.username }} <h1>
     </div>
     {% for post in posts %}
         {% if post in current_user.posts %} 
