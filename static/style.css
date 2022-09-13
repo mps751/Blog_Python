@@ -159,3 +159,13 @@ li a:hover {
     background-color: #212E3C;
     font-family: Andale Mono, monospace;
 }
+
+img {
+    width: 7em;
+    height: 7em;
+}
+
+.profile h1 {
+    float: right;
+    padding-right: 9.8em;
+}

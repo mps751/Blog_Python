@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="profile">
-        <img src="data:;base64,{{ img }}"/>
+        <img src='/static/uploads/{{ current_user.id }}.jpg'/>
         <h1> {{ current_user.username }} <h1>
     </div>
     {% for post in posts %}

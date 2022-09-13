@@ -6,13 +6,15 @@ from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user, login_required
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
+import os
  
-app = Flask("blog")
+app = Flask("app")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'chavesecreta'
 
-UPLOAD_FOLDER = './upload'
+UPLOAD_FOLDER = '/workspace/Blog_Python/static/uploads'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 db = SQLAlchemy(app)
@@ -38,13 +40,6 @@ class User(UserMixin, db.Model):
     
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-
-class Img(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    img = db.Column(db.Text, unique=True, nullable=False)
-    name = db.Column(db.Text, nullable=False)
-    mimetype = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 @login.user_loader
 def load_user(id):
@@ -98,7 +93,7 @@ def login():
             flash("Incorrect Username or Password")
             return redirect(url_for('login'))
         login_user(user)
-        return redirect(url_for('index'))
+        return redirect(url_for('upload'))
 
     return render_template("login.html")
 
@@ -107,7 +102,7 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@app.route('/profile/<string:username>')
+@app.route('/profile/<string:username>', methods=['GET'])
 @login_required
 def profile(username):
     posts = Post.query.order_by(desc(Post.created)).all()
@@ -123,24 +118,23 @@ def delete(id):
         db.session.rollback()
     return redirect(request.referrer)
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.split('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-        pic = request.files['pic']
-
-        filename = secure_filename(pic.filename)
-        mimetype = pic.mimetype
-
-        img = Img(img=pic.read(), mimetype=mimetype, name=filename)
-        db.session.add(img)
-        db.session.commit()
-
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            Response ('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            filename = str(current_user.id)+str('.jpg')
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('index'))
     return render_template("upload.html")
-
-@app.route('/<int:id>')
-def get_img(id):
-    img = Img.query.filter_by(id=id).first()
-    if not img:
-        return 'Img Not Found!', 404
-
-    return Response(img.img, mimetype=img.mimetype)
