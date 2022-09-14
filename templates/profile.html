@@ -3,27 +3,29 @@
 {% block title %} Profile {% endblock %}
 
 {% block content %}
-    <div class="profile">
-        <img src='/static/uploads/{{ current_user.id }}.jpg'/>
-        <h1> {{ current_user.username }} <h1>
-    </div>
-    {% for post in posts %}
-        {% if post in current_user.posts %} 
-            <article class="post">
-                <header>
-                    <div>
-                        <div class="about">
-                            <span> <div class="delete">
-                                {% if current_user.is_authenticated %}
-                                        <a href="{{ url_for('delete', id = post.id) }}"> <i class="fa fa-trash"> </i>  </a>
-                            </div> </span>
-                                {% endif %} {{ post.author.username }} <span class="date">
-                                {{ post.created.strftime('%d/%m/%Y') }} </span> 
+        <div class="profile">
+            <img src='/static/uploads/{{ user }}.jpg'/>
+            <h1> {{ user }} <h1>
+        </div>
+        {% for post in posts %}
+            {% if user == post.author.username %} 
+                <article class="post">
+                    <header>
+                        <div>
+                            <div class="about">
+                                <span> <div class="delete">
+                                    {% if current_user.is_authenticated and post in current_user.posts %}
+                                            <a href="{{ url_for('delete', id = post.id) }}"> <i class="fa fa-trash"> </i>  </a>
+                                </div> </span>
+                                    {% endif %} 
+                                    <span class="username"> {{ post.author.username }} </span>
+                                    <span class="date">
+                                    {{ post.created.strftime('%d/%m/%Y') }} </span> 
+                            </div>
                         </div>
-                    </div>
-                </header>
-                <p class="body"> {{post.body}} </p>
-            </article>  
-        {% endif %}   
-    {% endfor %}
+                    </header>
+                    <p class="body"> {{post.body}} </p>
+                </article>  
+            {% endif %}   
+        {% endfor %}
 {% endblock%}

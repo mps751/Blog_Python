@@ -105,8 +105,9 @@ def logout():
 @app.route('/profile/<string:username>', methods=['GET'])
 @login_required
 def profile(username):
-    posts = Post.query.order_by(desc(Post.created)).all()
-    return render_template('profile.html', posts = posts)
+    user = username
+    posts = Post.query.order_by(desc(Post.created))
+    return render_template('profile.html', posts = posts, user=user)
 
 @app.route('/delete/<int:id>')
 @login_required
@@ -134,7 +135,7 @@ def upload():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            filename = str(current_user.id)+str('.jpg')
+            filename = str(current_user.username)+str('.jpg')
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('index'))
     return render_template("upload.html")

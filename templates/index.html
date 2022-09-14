@@ -14,6 +14,7 @@
                         <li> <a href="{{ url_for('logout') }}"> Log Out </a> </li>
                         <li> <a href="{{ url_for('profile', username = current_user.username) }}"> Profile </a></li>
                         <li> <span> {{current_user.username}} </span> </li>
+                        <li> <img src='/static/uploads/{{ current_user.username }}.jpg'/> </li>
                     </ul>
 
                 {% else %}

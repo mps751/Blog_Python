@@ -25,6 +25,16 @@ body {
     background-color: #111922;
 }
 
+.nav img {
+    display: flex;
+    height: 2em;
+    width: 2em;
+    border-radius: 100%;
+    margin-top: -10px;
+    padding-top: 0em;
+    padding-bottom: auto;
+}
+
 .nav li {
     display: inline;
     float: right;
@@ -128,8 +138,19 @@ li a:hover {
 
 }
 
+.username a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1em;
+}
+
+.username a:hover{
+    color: aqua;
+}
+
 .date {
     font-size: 0.7em;
+    color: #C5CACF;
 }
 
 .body {
@@ -163,6 +184,7 @@ li a:hover {
 img {
     width: 7em;
     height: 7em;
+    border-radius: 100%;
 }
 
 .profile h1 {
