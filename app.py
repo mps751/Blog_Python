@@ -41,11 +41,12 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+db.create_all()
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
 
-db.create_all()
 
 @app.route("/")
 @app.route("/home", methods=["POST", "GET"])
@@ -84,7 +85,7 @@ def register():
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
@@ -93,7 +94,7 @@ def login():
             flash("Incorrect Username or Password")
             return redirect(url_for('login'))
         login_user(user)
-        return redirect(url_for('upload'))
+        return redirect(url_for('index'))
 
     return render_template("login.html")
 
