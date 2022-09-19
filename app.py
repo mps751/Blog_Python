@@ -6,6 +6,7 @@ from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user, login_required
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
+import os.path
 import os
  
 app = Flask("app")
@@ -34,18 +35,12 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), nullable=False, unique=True)
     password_hash = db.Column(db.String(40), nullable=False)
     posts = db.relationship('Post', backref='author')
-    image_id = db.Column(db.Integer, db.ForeignKey('image.images'))
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
     
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-
-class Image(db.Model):
-    __tablename__ = "image"
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    images = db.Column(db.Integer)
 
 db.create_all()
 
@@ -100,11 +95,11 @@ def login():
             flash("Incorrect Username or Password")
             return redirect(url_for('login'))
         login_user(user)
-        image_new = current_user.id
-        if image_new != current_user.image_id:
-            return redirect(url_for('upload'))
-        elif current_user.id == current_user.image_id:
+        name = current_user.username
+        if os.path.isfile('/workspace/Blog_Python/static/uploads/' + name + '.jpg'):
             return redirect(url_for('index'))
+        else:
+            return redirect(url_for('upload'))
 
     return render_template("login.html")
 
@@ -148,8 +143,5 @@ def upload():
             filename = secure_filename(file.filename)
             filename = str(current_user.username)+str('.jpg')
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            new_image = Image(images=current_user.id)
-            db.session.add(new_image)
-            db.session.commit()
             return redirect(url_for('index'))
     return render_template("upload.html")
