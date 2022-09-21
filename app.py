@@ -144,4 +144,4 @@ def upload():
             filename = str(current_user.username)+str('.jpg')
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('index'))
-    return render_template("upload.html")
+    return render_template("upload.html", name = current_user.username)

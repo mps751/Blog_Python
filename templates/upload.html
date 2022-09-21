@@ -1,8 +1,14 @@
-<html>
-   <body>
-      <form method = "POST" enctype = "multipart/form-data">
-         <input type = "file" name = "file" />
-         <input type = "submit"/>
-      </form>
-   </body>
-</html>
+{% extends 'index.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+      <h2> Select Profile Picture </h2>
+      <div class="image">
+         <form method = "POST" enctype = "multipart/form-data">
+            <input type = "file" name = "file" />
+            <input type = "submit" value="UPLOAD">
+         </form>
+      </div>
+
+{% endblock %}

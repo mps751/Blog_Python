@@ -3,20 +3,23 @@
 {% block title %} Cadastrar {% endblock %}
 
 {% block content %}
+
     <h2> Register </h2>
-    <form method="POST">
+    <div class="login">
+        <form method="POST">
 
-        <input id="username" name="username" placeholder="Username" required>
+            <input id="username" name="username" placeholder="Username" required>
 
-        <input type="email" id="email" name="email" placeholder="Email">
+            <input type="email" id="email" name="email" placeholder="Email">
 
-        <input type="password" password" name="password" placeholder="Password" required>
+            <input type="password" password" name="password" placeholder="Password" required>
 
-        {% for message in get_flashed_messages() %}
-            <div class="flash"> {{ message }} </div>
-        {% endfor %}
+            {% for message in get_flashed_messages() %}
+                <div class="flash"> {{ message }} </div>
+            {% endfor %}
 
-        <input type="submit" value="CADASTRAR">
-    </form>
+            <input type="submit" value="CADASTRAR">
+        </form>
+    </div>
 
 {% endblock %}

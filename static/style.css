@@ -77,12 +77,14 @@ li a:hover {
 
 .create input[type="submit"] {
     position: relative;
+    margin-top: 1em;
     margin-left: auto;
     background-color:rgb(31, 211, 214);
     color: black;
-    text-align: center;
     height: 1.5em auto;
     width: 4.5em;
+    padding: 0.6em;
+    font-size: large;
     font-family: Andale Mono, monospace;
 }
 
@@ -95,16 +97,34 @@ li a:hover {
     border-color: #ffffff;
 }
 
-.content textarea {
+.login textarea {
     padding: 1em;
     margin-bottom: 1.5em; 
     outline: none;
 }
 
-.content input[type="submit"]{
+.login, .image input[type="submit"]{
+    margin-left: auto;
+    margin-right: auto;
+    width: 10em;
     font-size: large;
     font-family: Andale Mono, monospace;
     padding: 8px;
+}
+
+.login, .image input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #111922;
+    color: #ffffff;
+    border-width: 0.8px;
+    border-style: solid;
+    border-color: #ffffff;
+}
+
+.image [type="file"] {
+    cursor: pointer;
+    color: #ffffff;
+    font-size: medium;
 }
 
 .content h2 {
@@ -135,7 +155,6 @@ li a:hover {
 .about {
     font-family: Andale Mono, monospace;
     font-size: 0.8em;
-
 }
 
 .username a {
