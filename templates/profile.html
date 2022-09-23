@@ -6,6 +6,10 @@
         <div class="profile">
             <img src='/static/uploads/{{ user }}.jpg'/>
             <h1> {{ user }} <h1>
+            {% if user == current_user.username %}
+                <span> <div class="delete"> <a href="{{ url_for('delete_user', id = current_user.id) }}"> <i class="fa fa-trash"> </i>  </a>
+                </div> </span>
+            {% endif %}
         </div>
         {% for post in posts %}
             {% if user == post.author.username %} 

@@ -103,7 +103,7 @@ li a:hover {
     outline: none;
 }
 
-.login, .image input[type="submit"]{
+.login input[type="submit"] {
     margin-left: auto;
     margin-right: auto;
     width: 10em;
@@ -112,7 +112,25 @@ li a:hover {
     padding: 8px;
 }
 
-.login, .image input[type="submit"]:hover {
+.login input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #111922;
+    color: #ffffff;
+    border-width: 0.8px;
+    border-style: solid;
+    border-color: #ffffff;
+}
+
+.image input[type="submit"] {
+    margin-left: auto;
+    margin-right: auto;
+    width: 10em;
+    font-size: large;
+    font-family: Andale Mono, monospace;
+    padding: 8px;
+}
+
+.image input[type="submit"]:hover {
     cursor: pointer;
     background-color: #111922;
     color: #ffffff;
@@ -204,6 +222,12 @@ img {
     width: 7em;
     height: 7em;
     border-radius: 100%;
+}
+
+
+.delete_user a {
+    float: right;
+    margin-top: -5cm;
 }
 
 .profile h1 {

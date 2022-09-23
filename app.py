@@ -5,7 +5,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user, login_required
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy import desc
+from sqlalchemy import desc, exc
 import os.path
 import os
  
@@ -66,8 +66,6 @@ def index():
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
@@ -77,8 +75,9 @@ def register():
             new_user.set_password(password)
             db.session.add(new_user)
             db.session.commit()
-        except IntegrityError:
+        except exc.IntegrityError:
             flash("Username or Email already exists")
+            db.session.rollback()
         else:
             return redirect(url_for('login'))    
     return render_template('register.html')
@@ -124,6 +123,15 @@ def delete(id):
     except:
         db.session.rollback()
     return redirect(request.referrer)
+
+@app.route('/delete_user/<int:id>')
+@login_required
+def delete_user(id):
+    delete_img = str(current_user.username)+str('.jpg')
+    os.remove(os.path.join(app.config['UPLOAD_FOLDER'], delete_img))
+    user_id = User.query.filter(User.id==id).delete()
+    db.session.commit()
+    return redirect(url_for('index'))
 
 def allowed_file(filename):
     return '.' in filename and \
