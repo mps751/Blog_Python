@@ -208,11 +208,12 @@ li a:hover {
 
 .profile {
     max-width: 800px;
-    font-size: x-large;
     margin-left: 20rem;
     margin-right: 20rem;
     margin-top: 3rem;
     padding: 1em;
+    padding-bottom: 3em;
+    font-size: x-large;
     color: white;
     background-color: #212E3C;
     font-family: Andale Mono, monospace;
@@ -227,10 +228,21 @@ img {
 
 .delete_user a {
     float: right;
-    margin-top: -5cm;
+    color: #ffffff;
 }
 
-.profile h1 {
+.delete_user a:hover {
+    cursor: pointer;
+    color:rgb(31, 211, 214);
+    font-size: 30px;
+}
+
+.profile_user {
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
     float: right;
-    padding-right: 9.8em;
+    margin-top: 0.4em;
+    margin-right: 15em;
+    margin-left: 1em;
 }

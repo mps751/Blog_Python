@@ -14,7 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'chavesecreta'
 
-UPLOAD_FOLDER = '/workspace/Blog_Python/static/uploads'
+UPLOAD_FOLDER = (r".\static\uploads")
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -34,6 +34,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(20), nullable=False, unique=True, index=True)
     email = db.Column(db.String(64), nullable=False, unique=True)
     password_hash = db.Column(db.String(40), nullable=False)
+    created = db.Column(db.DateTime, default=datetime.now)
     posts = db.relationship('Post', backref='author')
 
     def set_password(self, password):
@@ -94,8 +95,8 @@ def login():
             flash("Incorrect Username or Password")
             return redirect(url_for('login'))
         login_user(user)
-        name = current_user.username
-        if os.path.isfile('/workspace/Blog_Python/static/uploads/' + name + '.jpg'):
+        name = "/" + current_user.username
+        if os.path.isfile(r".\static\uploads" + name + ".jpg"):
             return redirect(url_for('index'))
         else:
             return redirect(url_for('upload'))
