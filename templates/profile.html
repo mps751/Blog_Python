@@ -5,15 +5,16 @@
 {% block content %}
         <div class="profile">
             <span class="delete_user"> 
-                {% if user == current_user.username %}
+                {% if user.username == current_user.username %}
                     <a href="{{ url_for('delete_user', id = current_user.id) }}"> <i class="fa fa-trash"> </i>  </a>
             </span>
                 {% endif %}
-                <span class="img"> <img src='/static/uploads/{{ user }}.jpg'/> </span>
-                <span class="profile_user"> {{ user }} </span>
+                <span class="img"> <img src='/static/uploads/{{ user.username }}.jpg'/> </span>
+                <span class="profile_user"> {{ user.username }} </span>
+                <span class="date_user"> Entered in {{ user.created.strftime('%d/%m/%Y') }} </span>
         </div>
         {% for post in posts %}
-            {% if user == post.author.username %} 
+            {% if user.username == post.author.username %} 
                 <article class="post">
                     <header>
                         <div>

@@ -246,3 +246,14 @@ img {
     margin-right: 15em;
     margin-left: 1em;
 }
+
+.date_user {
+    font-size: 18px;
+    position: absolute;
+    float: right;
+    font-weight: bold;
+    margin-top: 2.8em;
+    margin-right: 15em;
+    margin-left: 1.6em;
+    color: #C5CACF;
+}

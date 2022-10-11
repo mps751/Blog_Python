@@ -78,7 +78,6 @@ def register():
             db.session.commit()
         except exc.IntegrityError:
             flash("Username or Email already exists")
-            db.session.rollback()
         else:
             return redirect(url_for('login'))    
     return render_template('register.html')
@@ -111,7 +110,7 @@ def logout():
 @app.route('/profile/<string:username>', methods=['GET'])
 @login_required
 def profile(username):
-    user = username
+    user = User.query.filter(User.username == username).first()
     posts = Post.query.order_by(desc(Post.created))
     return render_template('profile.html', posts = posts, user=user)
 
@@ -130,6 +129,7 @@ def delete(id):
 def delete_user(id):
     delete_img = str(current_user.username)+str('.jpg')
     os.remove(os.path.join(app.config['UPLOAD_FOLDER'], delete_img))
+    posts_deleted = Post.query.filter(Post.user_id == current_user.id).delete()
     user_id = User.query.filter(User.id==id).delete()
     db.session.commit()
     return redirect(url_for('index'))
