@@ -1,6 +1,3 @@
-Criando ambiente virtual: <p>
-  python -m venv venv
-
 Ativando o ambiente virtual> <p>
   venv/Scripts/Activate
   
