@@ -24,6 +24,7 @@
                         </span> 
                         {% endif %}
                     {% endif %} 
+                    <span class="img_post"> <img src='/static/uploads/{{ post.author.username }}.jpg'/> </span> 
                     <span class="username" > {% if current_user.is_authenticated %}<a href="{{ url_for('profile', username = post.author.username ) }}">
                         {% endif %} {{ post.author.username }} </a> </span> 
                     <span class="date">

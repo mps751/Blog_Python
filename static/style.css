@@ -172,6 +172,12 @@ li a:hover {
     background-color: #212E3C;
 }
 
+.img_post img{
+    margin-bottom: -0.8em;
+    height: 2.2em;
+    width: 2.2em;
+}
+
 .about {
     font-family: Andale Mono, monospace;
     font-size: 0.8em;
@@ -193,7 +199,8 @@ li a:hover {
 }
 
 .body {
-    font-size: 0.9em;
+    padding-top: 0.4em;
+    font-size: 0.86em;
 }
 
 .delete a {

@@ -28,7 +28,8 @@
                                     {% if current_user.is_authenticated and post in current_user.posts %}
                                             <a href="{{ url_for('delete', id = post.id) }}"> <i class="fa fa-trash"> </i>  </a>
                                 </div> </span>
-                                    {% endif %} 
+                                    {% endif %}
+                                    <span class="img_post"> <img src='/static/uploads/{{ post.author.username }}.jpg'/> </span> 
                                     <span class="username"> {{ post.author.username }} </span>
                                     <span class="date">
                                     {{ post.created.strftime('%d/%m/%Y') }} </span> 
