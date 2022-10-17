@@ -16,4 +16,7 @@ Por último, o comando para rodar o servidor:
 
       flask run
  
- ##Sobre
+ ## Sobre
+
+Este é um projeto individual meu que teve o principal intuito de aprimorar meus conhecimentos na linguagem de programação Python e ao micro-framework <a href="https://flask.palletsprojects.com/en/2.2.x/"> Flask </a>, destinado principalmente a pequenas aplicações Web. 
+Espero que goste :)
