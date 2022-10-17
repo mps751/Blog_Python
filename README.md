@@ -7,4 +7,5 @@
     pip install -r requirements.txt
 
 ⦁ Por último, o comando para rodar o servidor:
+
     flask run
